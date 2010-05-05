@@ -420,7 +420,7 @@
 			jsTPL("test",[],"test");
 			jsTPL("{%: test {} %}is hard",[],"kaza");
 			
-			var got = $.template("{%: kaza {} %}so do it")(),
+			var got = jsTPL("{%: kaza {} %}so do it")(),
 			expected ="testis hardso do it";
 				   
 			global+=_end();
@@ -570,7 +570,7 @@
 				
 				jsTPL("1{%block 'a'%}2{%/block%}3{%block 'b'%}4{%/block%}5{%block 'c'%}6{%/block%}7",[],"a");
 				
-				var got = $.template("{%extends 'a'%}{%block 'a'%}A{%/block%}")(),
+				var got = jsTPL("{%extends 'a'%}{%block 'a'%}A{%/block%}")(),
 					expected = "1A34567";
 				
 				global+=_end();
@@ -761,7 +761,7 @@
 					_start();
 					
 					while (i>0) {
-						$.template(g,{}).html();
+						jsTPL(g)();
 						i--;
 					}
 					
@@ -806,7 +806,7 @@
 				
 				var
 					  inc_e = "123",
-					  g1="<div>",
+					  g1="",
 					  g2="{%extends 'a'%}",
 					  e="";
 					
@@ -815,7 +815,7 @@
 						g2+="{%block 'a"+i+"'%}2{%/block%}";
 						e+=inc_e;
 					}
-					g1+="</div>";
+					
 					
 					jsTPL(g1, [], "a");
 					
@@ -827,7 +827,7 @@
 					_start();
 					
 					while (i>0) {
-						$.template(g2,{}).html();
+						jsTPL(g2)();
 						i--;
 					}
 					
@@ -867,7 +867,7 @@
 				console.info("Escape");
 				_start();
 				
-				var got = jsTPL("0{%filter escape%}:{%/filter%}1"),
+				var got = jsTPL("0{%filter escape%}:{%/filter%}1")(),
 					expected = "0%3A1";
 				
 				global+=_end();
@@ -887,7 +887,7 @@
 				console.info("Safe");
 				_start();
 				
-				var got = jsTPL("0{%filter safe%}<>&\"'{%/filter%}1"),
+				var got = jsTPL("0{%filter safe%}<>&\"'{%/filter%}1")(),
 					expected = "0&lt;&gt;&amp;&quot;&#039;1";
 				
 				global+=_end();
@@ -907,7 +907,7 @@
 				console.info("Upper");
 				_start();
 				
-				var got = jsTPL("0{%filter upper%}abc{%/filter%}1"),
+				var got = jsTPL("0{%filter upper%}abc{%/filter%}1")(),
 					expected = "0ABC1";
 				
 				global+=_end();
@@ -927,7 +927,7 @@
 				console.info("Lower");
 				_start();
 				
-				var got = jsTPL("0{%filter lower%}ABC{%/filter%}1"),
+				var got = jsTPL("0{%filter lower%}ABC{%/filter%}1")(),
 					expected = "0abc1";
 				
 				global+=_end();
@@ -947,7 +947,7 @@
 				console.info("Hierarchical");
 				_start();
 				
-				var got = jsTPL("0{%filter escape%}{%filter safe%}<>{%/filter%}{%/filter%}1"),
+				var got = jsTPL("0{%filter escape%}{%filter safe%}<>{%/filter%}{%/filter%}1")(),
 					expected = "0%26lt%3B%26gt%3B1";
 				
 				global+=_end();
