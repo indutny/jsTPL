@@ -12,7 +12,7 @@ var jsTPL = (function($,undefined) {
 	 * @return {Function}
 	 */
 	function $eval(a) {
-		return eval(a);
+		return eval(a)[0];
 	}
  
     (function ($tab , gid ,
@@ -196,7 +196,8 @@ var jsTPL = (function($,undefined) {
 	
 			// Create function with overdriven args
 			// In secure closure
-			i = $eval("(function($scope,$args,$p," + args.join(",") + "){$_=[];" + compiled + ";return $_.join('')})");						
+			// Fixed: IE was throwing error I is undefined, so returned to array evaluation
+			i = $eval("[function($scope,$args,$p," + args.join(",") + "){$_=[];" + compiled + ";return $_.join('')}]");						
 			
 			/**
 			* Generate arguments array that will be passed to template function
