@@ -1,4 +1,4 @@
-==jQuery.tpl project: simple, fast and powerfull templates for jQuery and javascript (http://github.com/donnerjack13589/jsTPL).
+==jsTPL project: simple, fast and powerfull templates for javascript and jQuery(http://github.com/donnerjack13589/jQuery.tpl).
 It's easy to learn - start now!
 
 ==Basic examples:
